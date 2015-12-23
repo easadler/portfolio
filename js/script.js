@@ -18,7 +18,7 @@ app.config( ['$routeProvider', function($routeProvider) {
                 templateUrl: 'templates/contact.html'
             })
             .otherwise({
-                redirectTo: '/'
+                templateUrl: 'templates/gists.html'
             });
 	}]);
 
