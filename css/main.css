@@ -108,6 +108,11 @@ display: inline-block}
     line-height:1.6em
 }
 
+.changedMain {
+        margin:0 0 1.5em;
+    padding:0 50px 2em
+}
+
 .intro span {
     font-weight:100
 }
