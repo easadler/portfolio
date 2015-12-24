@@ -1,3 +1,14 @@
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+
 var app = angular.module('RoutingApp', ['ngRoute']);
 
 app.config( ['$routeProvider', function($routeProvider) {
@@ -26,7 +37,8 @@ app.controller('myCtrl', function($scope, $http, $sce) {
 	$http.get("https://api.github.com/users/easadler/gists")
         .success(function (gists) {
                 var html = [];
-                gists.forEach(function(gist) {
+
+                shuffleArray(gists).forEach(function(gist) {
                 html.push('<div class="col-sm-6 col-md-3 col-lg-3"> <div class="grid-list">');
                 html.push('<a href="' + gist.url + '" target="_blank">');
                 html.push('<img class="img-responsive" src="' + gist.files['thumbnail.png']['raw_url'] +  '"><\/a>');
