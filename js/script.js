@@ -28,6 +28,12 @@ app.config( ['$routeProvider', function($routeProvider) {
             .when('/contact', {
                 templateUrl: 'templates/contact.html'
             })
+            .when('/blogposts/:cat/:id', {
+                templateUrl: function(urlattr){
+                    console.log(urlattr)
+                    return 'blogposts/' + urlattr.cat + '_' + urlattr.id + '.html';
+                }
+            })
             .otherwise({
                 templateUrl: 'templates/gists.html'
             });
