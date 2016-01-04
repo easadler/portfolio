@@ -30,7 +30,6 @@ app.config( ['$routeProvider', function($routeProvider) {
             })
             .when('/blogposts/:cat/:id', {
                 templateUrl: function(urlattr){
-                    console.log(urlattr)
                     return 'blogposts/' + urlattr.cat + '_' + urlattr.id + '.html';
                 }
             })
@@ -46,11 +45,13 @@ app.controller('myCtrl', function($scope, $http, $sce) {
 
                 shuffleArray(gists).forEach(function(gist) {
                 html.push('<div class="col-sm-6 col-md-3 col-lg-3"> <div class="grid-list">');
-                html.push('<a href="' + gist.url + '" target="_blank">');
-                html.push('<img class="img-responsive" src="' + gist.files['thumbnail.png']['raw_url'] +  '"><\/a>');
                 if(gist.description.substring(0,5) == 'Class'){
+                html.push('<a href="' + 'https://gist.github.com/easadler/' + gist.id + '#file-readme-md' + '" target="_blank">');
+                html.push('<img class="img-responsive" src="' + gist.files['thumbnail.png']['raw_url'] +  '"><\/a>');
                 html.push('<div class="overlay"><a target="_blank"  href="' + 'https://gist.github.com/easadler/' + gist.id + '#file-readme-md' + '">');
                 } else {
+                html.push('<a href="'+ 'http://bl.ocks.org/easadler/' + gist.id + '" target="_blank">');
+                html.push('<img class="img-responsive" src="' + gist.files['thumbnail.png']['raw_url'] +  '"><\/a>');
                 html.push('<div class="overlay"><a target="_blank"  href="' + 'http://bl.ocks.org/easadler/' + gist.id + '">');
                 }
                 html.push('<h2>' + gist.description + '<\/h2>');
