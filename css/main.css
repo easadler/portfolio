@@ -2,6 +2,12 @@ html {
     background:#f4f4f4
 }
 
+#embedded-resume {
+    margin-left: auto; 
+    margin-right: auto;
+    display: block;
+}
+
 .row > div,.container {
     transition:all .25s ease-in-out;
     -moz-transition:all .25s ease-in-out;
