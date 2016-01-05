@@ -94,13 +94,12 @@ app.controller('myCtrl', function($scope, $http, $sce) {
 });
 
 app.directive('markdown', function () {
-    var converter = new showdown.Converter({ extensions: ['codehighlight'], helper: ['replaceRecursiveRegExp']});
-    console.log(converter)
+    var converter = new showdown.Converter({ extensions: ['codehighlight']});
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
             var htmlText = converter.makeHtml(element.text());
-            element.html(converter. htmlText);
+            element.html(htmlText);
         }
     };
 
