@@ -1,3 +1,31 @@
+showdown.extension('codehighlight', function() {
+  function htmlunencode(text) {
+    return (
+      text
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+      );
+  }
+  return [
+    {
+      type: 'output',
+      filter: function (text, converter, options) {
+        // use new shodown's regexp engine to conditionally parse codeblocks
+        var left  = '<pre><code\\b[^>]*>',
+            right = '</code></pre>',
+            flags = 'g',
+            replacement = function (wholeMatch, match, left, right) {
+              // unescape match to prevent double escaping
+              match = htmlunencode(match);
+              return left + hljs.highlightAuto(match).value + right;
+            };
+        return showdown.helper.replaceRecursiveRegExp(text, replacement, left, right, flags);
+      }
+    }
+  ];
+});
+
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -66,12 +94,13 @@ app.controller('myCtrl', function($scope, $http, $sce) {
 });
 
 app.directive('markdown', function () {
-    var converter = new showdown.Converter();
+    var converter = new showdown.Converter({ extensions: ['codehighlight'], helper: ['replaceRecursiveRegExp']});
+    console.log(converter)
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {
             var htmlText = converter.makeHtml(element.text());
-            element.html(htmlText);
+            element.html(converter. htmlText);
         }
     };
 
